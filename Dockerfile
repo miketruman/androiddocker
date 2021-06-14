@@ -44,5 +44,5 @@ RUN sdkmanager "build-tools;30.0.0"
 RUN sdkmanager "platforms;android-25"
 RUN sdkmanager --install "system-images;android-25;google_apis;x86_64"
 WORKDIR ${ANDROID_HOME}
-RUN echo "no" | avdmanager --verbose create avd --force --name "generic_10" --package "system-images;android-25;google_apis;x86_64"
+RUN echo no | avdmanager create avd -f -n generic_10 -c 128M --device "pixel_xl" --abi google_apis/x86_64 -k "system-images;android-25;google_apis;x86_64"
 CMD ["emulator", "-avd", "generic_10", "-wipe-data","-memory", "2048" ]
