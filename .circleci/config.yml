@@ -13,7 +13,7 @@ jobs:
           command: docker build -t $IMAGE_NAME:latest .
   publish-latest:
     environment:
-      IMAGE_NAME: androiddocker
+      IMAGE_NAME: miketruman/androiddocker
     docker:
       - image: circleci/buildpack-deps:stretch
     steps:
@@ -21,6 +21,7 @@ jobs:
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
+            docker images
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             docker push $IMAGE_NAME:latest
 workflows:
