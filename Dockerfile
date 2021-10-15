@@ -37,7 +37,6 @@ RUN unzip commandlinetools-linux-6609375_latest.zip -d /usr/lib/android-sdk/cmdl
 
 RUN yes | sdkmanager --licenses
 
-
 RUN sdkmanager "platform-tools"
 RUN sdkmanager "emulator"
 RUN sdkmanager "build-tools;30.0.0"
