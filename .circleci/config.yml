@@ -15,8 +15,18 @@ jobs:
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             docker build -t $IMAGE_NAME:71 --build-arg ABIS=google_apis --build-arg ANDROID=android-25 .
             docker push $IMAGE_NAME:71
-            docker build -t $IMAGE_NAME:81 --build-arg ABIS=google_apis --build-arg ANDROID=android-27 .
-            docker push $IMAGE_NAME:81
+            docker build -t $IMAGE_NAME:8 --build-arg ABIS=google_apis --build-arg ANDROID=android-26 .
+            docker push $IMAGE_NAME:8
+            docker build -t $IMAGE_NAME:9play --build-arg ABIS=google_apis_playstore --build-arg ANDROID=android-28 .
+            docker push $IMAGE_NAME:9play
+            docker build -t $IMAGE_NAME:10play --build-arg ABIS=google_apis_playstore --build-arg ANDROID=android-29 .
+            docker push $IMAGE_NAME:10play
+            docker build -t $IMAGE_NAME:11play --build-arg ABIS=google_apis_playstore --build-arg ANDROID=android-30 .
+            docker push $IMAGE_NAME:11play
+            docker build -t $IMAGE_NAME:12play --build-arg ABIS=google_apis_playstore --build-arg ANDROID=android-32 .
+            docker push $IMAGE_NAME:12play
+            docker build -t $IMAGE_NAME:13play --build-arg ABIS=google_apis_playstore --build-arg ANDROID=android-33 .
+            docker push $IMAGE_NAME:13play
 workflows:
   version: 2
   build-master:
