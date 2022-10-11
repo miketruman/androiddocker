@@ -23,13 +23,17 @@ RUN mv /usr/lib/android-sdk/tmp/cmdline-tools/* /usr/lib/android-sdk/cmdline-too
 RUN apt-get install -y openjdk-8-jdk
 RUN yes | sdkmanager --licenses
 
-RUN sdkmanager "platform-tools"
 RUN sdkmanager "emulator"
-RUN sdkmanager "build-tools;30.0.0"
-RUN sdkmanager "platforms;android-25"
-RUN sdkmanager --install "system-images;android-25;google_apis;x86_64"
+RUN sdkmanager "platform-tools"
+ARG ABIS
+ARG ANDROID
+RUN export
+RUN sdkmanager --install "system-images;$ANDROID;$ABIS;x86_64"
+RUN sdkmanager "platforms;$ANDROID"
+RUN sdkmanager --list --verbose |grep google_apis |grep x86_64
 WORKDIR ${ANDROID_HOME}
 RUN touch /usr/lib/android-sdk/.android/emu-update-last-check.ini
 ENV ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL 2
-RUN echo no | avdmanager create avd -f -n generic_10 -c 128M --device "pixel_xl" --abi google_apis/x86_64 -k "system-images;android-25;google_apis;x86_64"
-CMD ["emulator", "-avd", "generic_10", "-wipe-data","-memory", "2048" ]
+RUN echo no | avdmanager create avd -f -n generic_10 -c 128M --device "pixel_xl" --abi google_apis/x86_64 -k "system-images;$ANDROID;$ABIS;x86_64"
+CMD ["emulator", "-avd", "generic_10", "-wipe-data","-memory", "2048", "-no-snapshot" ]
+
