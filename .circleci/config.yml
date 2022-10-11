@@ -27,6 +27,8 @@ jobs:
             docker push $IMAGE_NAME:12play
             docker build -t $IMAGE_NAME:13play --build-arg ABIS=google_apis_playstore --build-arg ANDROID=android-33 .
             docker push $IMAGE_NAME:13play
+            docker build -t $IMAGE_NAME:latest --build-arg ABIS=google_apis_playstore --build-arg ANDROID=android-33 .
+            docker push $IMAGE_NAME:latest
 workflows:
   version: 2
   build-master:
