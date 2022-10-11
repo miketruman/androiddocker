@@ -34,6 +34,6 @@ RUN sdkmanager --list --verbose |grep google_apis |grep x86_64
 WORKDIR ${ANDROID_HOME}
 RUN touch /usr/lib/android-sdk/.android/emu-update-last-check.ini
 ENV ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL 2
-RUN echo no | avdmanager create avd -f -n generic_10 -c 128M --device "pixel_xl" --abi google_apis/x86_64 -k "system-images;$ANDROID;$ABIS;x86_64"
+RUN echo no | avdmanager create avd -f -n generic_10 -c 128M --device "pixel_xl" --abi $ABIS/x86_64 -k "system-images;$ANDROID;$ABIS;x86_64"
 CMD ["emulator", "-avd", "generic_10", "-wipe-data","-memory", "2048", "-no-snapshot" ]
 
