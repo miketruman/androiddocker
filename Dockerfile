@@ -38,5 +38,5 @@ RUN adb keygen .android/adbkey
 ENV ADB_VENDOR_KEYS=/root/.android/adbkey
 RUN apt-get install -y tzdata telnet vim
 RUN echo no | avdmanager create avd -f -n generic_10 -c 128M --device "pixel_xl" --abi $ABIS/x86_64 -k "system-images;$ANDROID;$ABIS;x86_64"
-CMD ["emulator", "-avd", "generic_10","-wipe-data","-noaudio", "-skip-adb-auth", "-wipe-data","-memory", "2048"]
+CMD ["emulator", "-avd", "generic_10","-noaudio", "-skip-adb-auth","-memory", "4096"]
 
