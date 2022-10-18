@@ -26,7 +26,9 @@ RUN yes | sdkmanager --licenses
 RUN sdkmanager "emulator"
 RUN sdkmanager "platform-tools"
 ARG ABIS
+ENV ABIS $ABIS
 ARG ANDROID
+ENV ANDROID $ANDROID
 RUN export
 RUN sdkmanager --install "system-images;$ANDROID;$ABIS;x86_64"
 RUN sdkmanager "platforms;$ANDROID"
@@ -38,8 +40,11 @@ RUN adb keygen .android/adbkey
 ENV ADB_VENDOR_KEYS=/root/.android/adbkey
 RUN apt-get install -y tzdata telnet vim
 RUN avdmanager list device
-RUN echo no | avdmanager create avd -f -n generic_10  --device "pixel_5" --abi $ABIS/x86_64  -k "system-images;$ANDROID;$ABIS;x86_64"
+#RUN echo no | avdmanager create avd -f -n generic_10  --device "pixel_5" --abi $ABIS/x86_64  -k "system-images;$ANDROID;$ABIS;x86_64"
 #RUN sdkmanager --install "extras;intel;Hardware_Accelerated_Execution_Manager"
 #CMD ["emulator", "-avd", "generic_10","-noaudio", "-skip-adb-auth","-memory", "2048", "-accel", "on", "-engine", "qemu2", "-verbose","-show-kernel","-logcat" ,"'*'"]
-CMD ["emulator", "-avd", "generic_10","-noaudio","-skip-adb-auth","-memory", "2048", "-accel", "on", "-engine", "qemu2"]
+#CMD ["emulator", "-avd", "generic_10","-noaudio","-skip-adb-auth","-memory", "2048", "-no-snapshot", "-wipe-data", "-no-snapshot-save", "-verbose", "-nocache", "-accel", "on", "-engine", "qemu2", "-qemu", "-enable-kvm", "-cpu", "host","-m", "2G"]
+COPY run.sh .
+RUN chmod 777 run.sh
+ENTRYPOINT ["./run.sh"]
 
