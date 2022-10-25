@@ -35,7 +35,7 @@ RUN sdkmanager "platforms;$ANDROID"
 RUN sdkmanager --list --verbose |grep google_apis |grep x86_64
 WORKDIR ${ANDROID_HOME}
 RUN touch /usr/lib/android-sdk/.android/emu-update-last-check.ini
-ENV ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL 2
+#ENV ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL 2
 RUN adb keygen .android/adbkey
 ENV ADB_VENDOR_KEYS=/root/.android/adbkey
 RUN apt-get install -y tzdata telnet vim
