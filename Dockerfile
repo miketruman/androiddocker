@@ -46,5 +46,5 @@ RUN avdmanager list device
 #CMD ["emulator", "-avd", "generic_10","-noaudio","-skip-adb-auth","-memory", "2048", "-no-snapshot", "-wipe-data", "-no-snapshot-save", "-verbose", "-nocache", "-accel", "on", "-engine", "qemu2", "-qemu", "-enable-kvm", "-cpu", "host","-m", "2G"]
 COPY run.sh .
 RUN chmod 777 run.sh
-ENTRYPOINT ["./run.sh"]
+CMD ["./run.sh"]
 
